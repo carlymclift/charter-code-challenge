@@ -12,9 +12,16 @@ const Table = () => {
   useEffect(() => {
     setRestaurants(fakeData.restaurants)
 
-    // const data = getRestaurantData()
-    // setRestaurants(data)
-  })
+    // async function getAndSetRestaurants() {
+    //   try{
+    //     let data = await getRestaurantData()
+    //     setRestaurants(data)
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    // }
+    // getAndSetRestaurants()
+  }, [])
 
   const cards = restaurants.map(restaurants => {
     return(
