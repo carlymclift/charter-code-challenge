@@ -1,22 +1,29 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import './Table.css'
 import fakeData from '../fakeData'
 import RestaurantCard from './RestaurantCard'
-import { getRestaurantData } from '../api/apiCalls'
+// import { getRestaurantData } from '../api/apiCalls'
 
 const Table = () => {
 // console.log(fakeData.restaurants)
 
-  const [restaurants, setRestaurants] = useState([])
+  const [allRestaurants, setRestaurants] = useState(fakeData.restaurants)
 
-  useEffect(() => {
-    setRestaurants(fakeData.restaurants)
+  // useEffect(() => {
+  //   setRestaurants(fakeData.restaurants)
 
-    // const data = getRestaurantData()
-    // setRestaurants(data)
-  })
+  //   // async function getAndSetRestaurants() {
+  //   //   try{
+  //   //     let data = await getRestaurantData()
+  //   //     setRestaurants(data)
+  //   //   } catch (error) {
+  //   //     console.log(error)
+  //   //   }
+  //   // }
+  //   // getAndSetRestaurants()
+  // }, [])
 
-  const cards = restaurants.map(restaurants => {
+  const cards = allRestaurants.map(restaurants => {
     return(
       <RestaurantCard
         key={restaurants.id}
@@ -26,9 +33,12 @@ const Table = () => {
   })
 
   return (
+    <>
+    <button onClick={() => setRestaurants(allRestaurants.sort((a, b) => a.name.localeCompare(b.name)))}>Alphabetize Results</button>
     <div className="table-container" >
       {cards}
     </div>
+    </>
   )
 }
 
