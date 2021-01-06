@@ -7,12 +7,14 @@ const RestaurantCard = ({address1, attire, city, genre, hours, id, lat, long, na
   return (
     <div className='card-box' >
         <h3 className='restaurant-name' >{name}</h3>
-        <p>{address1} {city}, {state}, {zip}</p>
-        <p>Phone: {telephone}</p>
-        <a target='_blank' rel='noreferrer' href={website} >Website</a>
-        <p>Hours:</p>
-        <div className='hours' >
-          {openHours}
+        <div>
+          <p>{address1} {city}, {state}, {zip}</p>
+          <p>Phone: {telephone}</p>
+          <a target='_blank' rel='noreferrer' href={website} >Website</a>
+          <p>Hours:</p>
+          <div className='hours' >
+            {openHours}
+          </div>
         </div>
     </div>
   )

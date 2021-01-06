@@ -1,10 +1,7 @@
 .table-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 2vh;
-  background-color: lightgray;
-  border-radius: 5px;
+  grid-gap: 3vh;
   margin: 2em;
-  padding: 2vh;
   width: 80%
 }
