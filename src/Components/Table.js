@@ -1,29 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import './Table.css'
-import fakeData from '../fakeData'
 import RestaurantCard from './RestaurantCard'
-// import { getRestaurantData } from '../api/apiCalls'
+import Search from './Search'
 
-const Table = () => {
-// console.log(fakeData.restaurants)
+const Table = ({ allRestaurants }) => {
 
-  const [allRestaurants, setRestaurants] = useState(fakeData.restaurants)
+  const [displayedData, setDisplayedData] = useState([])
+  const [formInput, setFormInput] = useState('')
 
-  // useEffect(() => {
-  //   setRestaurants(fakeData.restaurants)
+  useEffect(() => {
+    setDisplayedData(allRestaurants
+      .sort((a, b) => a.name.localeCompare(b.name)))
+  }, [])
 
-  //   // async function getAndSetRestaurants() {
-  //   //   try{
-  //   //     let data = await getRestaurantData()
-  //   //     setRestaurants(data)
-  //   //   } catch (error) {
-  //   //     console.log(error)
-  //   //   }
-  //   // }
-  //   // getAndSetRestaurants()
-  // }, [])
-
-  const cards = allRestaurants.map(restaurants => {
+  const restaurantCards = displayedData.map(restaurants => {
     return(
       <RestaurantCard
         key={restaurants.id}
@@ -32,12 +22,21 @@ const Table = () => {
     )
   })
 
+  const updateResults = () => {
+    setDisplayedData(allRestaurants
+      .filter(restaurant => restaurant.name.toUpperCase()
+      .includes(formInput.toUpperCase())))
+  }
+
   return (
     <>
-    <button onClick={() => setRestaurants(allRestaurants.sort((a, b) => a.name.localeCompare(b.name)))}>Alphabetize Results</button>
-    <div className="table-container" >
-      {cards}
-    </div>
+      <Search 
+        setFormInput={setFormInput}
+        updateResults={updateResults} 
+      />
+      <div className="table-container" >
+        { restaurantCards }
+      </div>
     </>
   )
 }
