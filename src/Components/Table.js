@@ -15,8 +15,9 @@ const Table = ({ allRestaurants }) => {
 
   const updateResults = () => {
     setDisplayedData(allRestaurants
-      .filter(restaurant => restaurant.name.toUpperCase()
-      .includes(formInput.toUpperCase())))
+      .filter(restaurant => restaurant.name.toUpperCase().includes(formInput.toUpperCase())
+      || restaurant.city.toUpperCase().includes(formInput.toUpperCase())
+      || restaurant.genre.toUpperCase().includes(formInput.toUpperCase())))
   }
 
   const restaurantCards = displayedData.map(restaurants => {
