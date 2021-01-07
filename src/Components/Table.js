@@ -1,29 +1,19 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import './Table.css'
-import fakeData from '../fakeData'
 import RestaurantCard from './RestaurantCard'
-import { getRestaurantData } from '../api/apiCalls'
+import Search from './Search'
 
-const Table = () => {
-// console.log(fakeData.restaurants)
+const Table = ({ allRestaurants }) => {
 
-  const [restaurants, setRestaurants] = useState([])
+  const [displayedData, setDisplayedData] = useState([])
+  const [formInput, setFormInput] = useState('')
 
   useEffect(() => {
-    setRestaurants(fakeData.restaurants)
-
-    // async function getAndSetRestaurants() {
-    //   try{
-    //     let data = await getRestaurantData()
-    //     setRestaurants(data)
-    //   } catch (error) {
-    //     console.log(error)
-    //   }
-    // }
-    // getAndSetRestaurants()
+    setDisplayedData(allRestaurants
+      .sort((a, b) => a.name.localeCompare(b.name)))
   }, [])
 
-  const cards = restaurants.map(restaurants => {
+  const restaurantCards = displayedData.map(restaurants => {
     return(
       <RestaurantCard
         key={restaurants.id}
@@ -32,10 +22,22 @@ const Table = () => {
     )
   })
 
+  const updateResults = () => {
+    setDisplayedData(allRestaurants
+      .filter(restaurant => restaurant.name.toUpperCase()
+      .includes(formInput.toUpperCase())))
+  }
+
   return (
-    <div className="table-container" >
-      {cards}
-    </div>
+    <>
+      <Search 
+        setFormInput={setFormInput}
+        updateResults={updateResults} 
+      />
+      <div className="table-container" >
+        { restaurantCards }
+      </div>
+    </>
   )
 }
 
