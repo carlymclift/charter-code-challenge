@@ -11,7 +11,13 @@ const Table = ({ allRestaurants }) => {
   useEffect(() => {
     setDisplayedData(allRestaurants
       .sort((a, b) => a.name.localeCompare(b.name)))
-  }, [])
+  }, [!formInput.length])
+
+  const updateResults = () => {
+    setDisplayedData(allRestaurants
+      .filter(restaurant => restaurant.name.toUpperCase()
+      .includes(formInput.toUpperCase())))
+  }
 
   const restaurantCards = displayedData.map(restaurants => {
     return(
@@ -21,12 +27,6 @@ const Table = ({ allRestaurants }) => {
       />
     )
   })
-
-  const updateResults = () => {
-    setDisplayedData(allRestaurants
-      .filter(restaurant => restaurant.name.toUpperCase()
-      .includes(formInput.toUpperCase())))
-  }
 
   return (
     <>
