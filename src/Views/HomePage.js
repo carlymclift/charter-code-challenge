@@ -8,17 +8,18 @@ const HomePage = () => {
 
   const [allRestaurants, setAllRestaurants] = useState(fakeData.restaurants)
 
-  // useEffect(() => {
-  //   async function getAndSetRestaurants() {
-  //     try{
-  //       let data = await getRestaurantData()
-  //       setAllRestaurants(data)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  //   getAndSetRestaurants()
-  // }, [])
+  useEffect(() => {
+    // async function getAndSetRestaurants() {
+    //   try{
+    //     let data = await getRestaurantData()
+    //     setAllRestaurants(data)
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    // }
+    // getAndSetRestaurants()
+    setAllRestaurants(allRestaurants.sort((a, b) => a.name.localeCompare(b.name)))
+  }, [])
 
   return (
     <main>
