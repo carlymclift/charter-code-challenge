@@ -9,8 +9,8 @@ const Table = ({ allRestaurants }) => {
   const [formInput, setFormInput] = useState('')
 
   useEffect(() => {
-    setDisplayedData(allRestaurants
-      .sort((a, b) => a.name.localeCompare(b.name)))
+
+    setDisplayedData(allRestaurants)
   }, [!formInput.length])
 
   const updateResults = () => {
